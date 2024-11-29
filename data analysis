@@ -1,1 +1,46 @@
-// start of code
+# start of code
+# not some thing being importated here are not being used at the moment, as im not sure if ill need them, so their included just in case
+
+import os
+import pydub
+from pydub import AudioSegment
+import wave
+import ffmpeg
+from scipy.io import wavfile
+import scipy.io
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import tkinter as tk
+from tkinter import filedialog
+from tkinter import *
+
+#displays the time length of the wav audio file
+def displayTime():
+    wave_time = pydub.AudioSegment.from_file(file=mod_file_name, format="wav")
+    Temp.insert(tk.END, "Time: " + str(len(wave_time)))
+#displays largest amplitude of the wav audio file.
+def displayamplitude():
+    wave_amp = pydub.AudioSegment.from_file(file=mod_file_name, format="wav")
+    Temp.insert(tk.END, "\nMax Amplitude " + str(wave_amp.max))
+
+#creates plot for the audio file
+def wavePlot():
+    wave_plot = mod_file_name
+    audio_file = wave.open(wave_plot, "r")
+    # Extract Raw Audio from Wav File
+    raw_audio = audio_file.readframes(-1)
+    print(type(raw_audio))
+    amp = np.fromstring(raw_audio, "int16")
+    fs = audio_file.getframerate()
+
+    time = np.linspace(0, len(amp) / fs, num=len(amp))
+
+    plt.figure(1)
+    plt.title("Signal Wave...")
+    plt.xlabel("Time [s]")
+    plt.ylabel("Amplitude")
+    plt.legend()
+    plt.plot(time, amp)
+    plt.show()
