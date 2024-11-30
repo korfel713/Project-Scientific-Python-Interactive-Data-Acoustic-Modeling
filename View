@@ -1,1 +1,61 @@
 #gui view file
+#not working right now, dont know why still testing
+
+import os
+import pydub
+from pydub import AudioSegment
+import wave
+import ffmpeg
+from scipy.io import wavfile
+import scipy.io
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import tkinter as tk
+from tkinter import filedialog
+from tkinter import *
+import checkifwav
+import data_modeling
+
+
+guiView = tk.Tk()
+guiView.title("Audio Downloader")
+guiView.resizable(False, False)
+guiView.geometry('600x600')
+
+select_button = tk.Button(guiView, text="Select File", command=checkifwav.select_file)
+
+
+entry = tk.Entry(guiView, width=50)
+
+
+time_button = tk.Button(guiView, text="Details", command=data_modeling.displayTime)
+
+
+status_label = tk.Label(guiView, text="")
+
+
+plot_graph_button = tk.Button(master=guiView, command=data_modeling.wavePlot, text="Plot Graph")
+
+# Create text widget and specify size.
+Temp = Text(guiView, height=5, width=52)
+# Create detail_label
+detail_label = Label(guiView, text="Details")
+detail_label.config(font=("Courier", 14))
+# Exit Button
+quit_button = Button(guiView, text="Exit",command=guiView.destroy)
+
+
+# Button Packing Order
+select_button.pack()
+entry.pack()
+detail_label.pack()
+Temp.pack()
+data_modeling.displayTime.pack()
+status_label.pack()
+plot_graph_button.pack()
+quit_button.pack()
+
+# Run Program
+guiView.mainloop()
