@@ -20,6 +20,12 @@ from tkinter import *
 def displayTime():
     wave_time = pydub.AudioSegment.from_file(file=mod_file_name, format="wav")
     Temp.insert(tk.END, "Time: " + str(len(wave_time)))
+
+#displays wave form  
+def print_details():
+    wave_form = pydub.AudioSegment.from_file(file=mod_file_name, format="wav")
+    Temp.insert(tk.END, "\nChannels " + str(wave_form.channels))
+
 #displays largest amplitude of the wav audio file.
 def displayamplitude():
     wave_amp = pydub.AudioSegment.from_file(file=mod_file_name, format="wav")
