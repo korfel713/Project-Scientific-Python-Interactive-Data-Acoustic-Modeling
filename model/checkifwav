@@ -22,3 +22,52 @@ if info.type == "MP3":
     sound = AudioSegment.from_mp3(input_file)
     sound.export(output_file, format="wav")
     output_file = "result.wav"
+
+#code below is same as above but put code in a function so that it can be called in other files. 
+#also added a select file function that in theory will allow for the audio file to be selcected in thr other files 
+
+# from pydub import AudioSegment
+# import fleep
+# import os
+# import pydub
+# import wave
+# import ffmpeg
+# from scipy.io import wavfile
+# import scipy.io
+# import matplotlib.pyplot as plt
+# import numpy as np
+# from matplotlib.figure import Figure
+# from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+# import tkinter as tk
+# from tkinter import filedialog
+# from tkinter import *
+# import view
+# global audioFile
+# def convert_to_wave():
+# 
+#     # assign files
+#     input_file = "clapMP3.mp3"
+#     output_file = "result.wav"
+# 
+#     #opens and reads input file as fleep
+#     with open(input_file, "rb") as file:
+#         info = fleep.get(file.read(128))
+# 
+#     # set the input path as the output if input is already in desired .wav format
+#     if info.type == "WAV":
+#         output = input_file
+# 
+#     # convert mp3 file to wav file
+#     if info.type == "MP3":
+#         sound = AudioSegment.from_mp3(input_file)
+#         sound.export(output_file, format="wav")
+#         output_file = "result.wav"
+# 
+# 
+# 
+# def select_file():
+#     file_path = filedialog.askopenfilename()
+#     if file_path:
+#         view.entry.delete(0, tk.END)
+#         view.entry.insert(tk.END, file_path)
+
