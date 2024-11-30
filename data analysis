@@ -22,7 +22,7 @@ def displayTime():
     Temp.insert(tk.END, "Time: " + str(len(wave_time)))
 
 #displays wave form  
-def print_details():
+def displayForm():
     wave_form = pydub.AudioSegment.from_file(file=mod_file_name, format="wav")
     Temp.insert(tk.END, "\nChannels " + str(wave_form.channels))
 
