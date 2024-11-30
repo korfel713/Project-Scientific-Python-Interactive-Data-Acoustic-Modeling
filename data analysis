@@ -1,5 +1,5 @@
 # start of code
-# not some thing being importated here are not being used at the moment, as im not sure if ill need them, so their included just in case
+# some things being imported here are not being used at the moment, as im not sure if i'll need them, so they are included just in case
 
 import os
 import pydub
