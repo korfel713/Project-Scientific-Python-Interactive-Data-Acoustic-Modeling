@@ -1,0 +1,24 @@
+# import required modules
+#if the file says ffmpeg is not found by the system,
+# make sure the package is downloaded and then restart window
+from os import path
+from pydub import AudioSegment
+import fleep
+
+# assign files 
+input_file = "clapMP3.mp3"
+output_file = "result.wav"
+
+#opens and reads input file as fleep
+with open(input_file, "rb") as file:
+    info = fleep.get(file.read(128))
+
+# set the input path as the output if input is already in desired .wav format
+if info.type == "WAV":
+    output = input_file
+
+# convert mp3 file to wav file
+if info.type == "MP3":
+    sound = AudioSegment.from_mp3(input_file)
+    sound.export(output_file, format="wav")
+    output_file = "result.wav"
