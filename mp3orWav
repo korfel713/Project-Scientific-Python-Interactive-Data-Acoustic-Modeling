@@ -1,0 +1,84 @@
+# import required modules
+import os
+from os import path
+from pydub import AudioSegment
+
+
+import tkinter as tk
+from tkinter import ttk
+from tkinter import filedialog as fd
+from tkinter.messagebox import showinfo
+
+gfile = ''
+# create the root window
+root = tk.Tk()
+root.title('Tkinter Open File Dialog')
+root.resizable(False, False)
+root.geometry('300x150')
+
+''' 
+tkinter.filedialog.askopenfilenames(**options) 
+Create an Open dialog and  
+return the selected filename(s) that correspond to  
+existing file(s). 
+'''
+
+
+def select_file():
+    filetypes = (
+        ('mp3 files', '*.mp3'),
+        ('All files', '*.*')
+    )
+
+    filename = fd.askopenfilename(
+        title='Open a file',
+        initialdir='/',
+        filetypes=filetypes)
+
+    gfile = filename
+
+    # tkinter.messagebox — Tkinter message prompts
+    # placeholder 1
+    showinfo(
+        title='Selected File',
+        message=filename
+    )
+
+    # placeholder 2
+    gfile_label = ttk.Label(root, text=gfile)
+    gfile_label.pack(side="bottom")
+    return gfile
+
+
+# open button
+open_button = ttk.Button(
+    root,
+    text='Open a File',
+    command=select_file
+)
+close_button = ttk.Button(
+    root,
+    text='Enter',
+    command=root.quit
+)
+open_button.pack(expand=True)
+close_button.pack(expand=True)
+# run the application
+root.mainloop()
+
+# assign files
+def upfile():
+    input_file = select_file()
+    output_file = "result.wav"
+
+    file_name, file_ext = path.splitext(input_file)
+    if file_ext == ".mp3":
+        # convert mp3 file to wav file
+        sound = AudioSegment.from_mp3(input_file)
+        sound.export(output_file, format="wav")
+        return output_file
+    if file_ext == ".wav":
+        sound = AudioSegment.from_wav(input_file)
+        sound.export(output_file, format="wav")
+        return output_file
+
