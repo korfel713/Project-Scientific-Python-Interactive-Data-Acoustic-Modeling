@@ -47,6 +47,8 @@ status_label = tk.Label(guiView, text="")
 
 plot_graph_button = tk.Button(master=guiView, command=dm.wavePlot, text="Plot Graph")
 
+plot_intensity_graph_button = tk.Button(master=guiView, command=dm.intensityPlot, text="Plot intensity Graph")
+
 # Create text widget and specify size.
 Temp = Text(guiView, height=5, width=52)
 # Create detail_label
@@ -67,6 +69,7 @@ amp_button.pack()
 form_button.pack()
 status_label.pack()
 plot_graph_button.pack()
+plot_intensity_graph_button.pack()
 quit_button.pack()
 
 # Run Program
