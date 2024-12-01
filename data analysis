@@ -99,6 +99,104 @@ def intensityPlot():
     plt.plot(time, fre)
     plt.show()
 
+class Count:
+    count = 0
+    def incriment(self):
+        if self.count >= 3:
+            self.count = 0
+        self.count +=1
+        
+
+    def getcount(self):
+        self.incriment()
+        return self.count
+
+
+def rt60graph():
+
+    rt60_plot = d.audioFile
+    audio_file = wave.open(rt60_plot, "r")
+    # Extract Raw Audio from Wav File
+    raw_audio = audio_file.readframes(-1)
+    print(type(raw_audio))
+    fre = np.fromstring(raw_audio, "int16")
+    fs = audio_file.getframerate()
+
+    #start geting the power of the audion  file
+    opower = np.abs(fre)
+
+    # Step 2: Convert power to a logarithmic scale (dB)
+    power = 20 * np.log10(opower + 1e-6)
+
+    # Step 3: Trim power to make signal starts at 0 dB
+    power -= np.max(power)
+
+    time = np.linspace(0, len(fre) / fs, num=len(fre))
+    if Count.getcount == 1:
+        power = np.argmax(power < -10)
+        plt.figure(1)
+        plt.title("low RT60 Graph")
+        plt.xlabel("Time [s]")
+        plt.ylabel("Power [db]")
+        plt.legend()
+        plt.plot(time, power)
+        plt.show()
+
+    if (Count.getcount == 2):
+        power = np.argmax(power < -5)
+        plt.figure(1)
+        plt.title("medium RT60 Graph")
+        plt.xlabel("Time [s]")
+        plt.ylabel("Power [db]")
+        plt.legend()
+        plt.plot(time, power)
+        plt.show()
+
+    if (Count.getcount == 3):
+        power = np.argmax(power < -3)
+        plt.figure(1)
+        plt.title("high RT60 Graph")
+        plt.xlabel("Time [s]")
+        plt.ylabel("Power [db]")
+        plt.legend()
+        plt.plot(time, power)
+        plt.show()
+
+def rt60graphcombine():
+    combine_rt60_plot = d.audioFile
+    audio_file = wave.open(combine_rt60_plot, "r")
+    # Extract Raw Audio from Wav File
+    raw_audio = audio_file.readframes(-1)
+    print(type(raw_audio))
+    fre = np.fromstring(raw_audio, "int16")
+    fs = audio_file.getframerate()
+
+    # start geting the power of the audion  file
+    opower = np.abs(fre)
+
+    # Step 2: Convert power to a logarithmic scale (dB)
+    power = 20 * np.log10(opower + 1e-6)
+
+    # Step 3: Trim power to make signal starts at 0 dB
+    power -= np.max(power)
+
+    time = np.linspace(0, len(fre) / fs, num=len(fre))
+
+    power1 = np.argmax(power < -10)
+    plt.figure(1)
+    plt.title("combined RT60 Graph")
+    plt.xlabel("Time [s]")
+    plt.ylabel("Power [db]")
+    plt.legend()
+    plt.plot(time, power1)
+
+    power2 = np.argmax(power < -5)
+    plt.plot(time, power2)
+
+    power3 = np.argmax(power < -3)
+    plt.plot(time, power3)
+    plt.show()
+
 
 def guiplot():
     from view import guiView
