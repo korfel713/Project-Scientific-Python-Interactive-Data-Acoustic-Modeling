@@ -11,8 +11,9 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import *
-import checkifwav
-import data_modeling
+import data_modeling as dm
+import download as d
+
 
 def select_file():
     file_path = filedialog.askopenfilename()
@@ -31,13 +32,20 @@ select_button = tk.Button(guiView, text="Select File", command=select_file)
 entry = tk.Entry(guiView, width=50)
 
 
-time_button = tk.Button(guiView, text="Details", command=data_modeling.displayTime)
+download_button = tk.Button(guiView, text="Download", command=d.downloader)
+
+
+time_button = tk.Button(guiView, text="Time Details", command=dm.displayTime)
+
+amp_button = tk.Button(guiView, text="frequency Details", command=dm.displayamplitude)
+
+form_button = tk.Button(guiView, text="form Details", command=dm.displayForm)
 
 
 status_label = tk.Label(guiView, text="")
 
 
-plot_graph_button = tk.Button(master=guiView, command=data_modeling.wavePlot, text="Plot Graph")
+plot_graph_button = tk.Button(master=guiView, command=dm.wavePlot, text="Plot Graph")
 
 # Create text widget and specify size.
 Temp = Text(guiView, height=5, width=52)
@@ -51,9 +59,12 @@ quit_button = Button(guiView, text="Exit",command=guiView.destroy)
 # Button Packing Order
 select_button.pack()
 entry.pack()
+download_button.pack()
 detail_label.pack()
 Temp.pack()
 time_button.pack()
+amp_button.pack()
+form_button.pack()
 status_label.pack()
 plot_graph_button.pack()
 quit_button.pack()
