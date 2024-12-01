@@ -45,14 +45,17 @@ form_button = tk.Button(guiView, text="form Details", command=dm.displayForm)
 status_label = tk.Label(guiView, text="")
 
 
-plot_graph_button = tk.Button(master=guiView, command=dm.wavePlot, text="Plot Graph")
+plot_wavegraph_button = tk.Button(master=guiView, command=dm.wavePlot, text="Plot wave Graph")
 
 plot_intensity_graph_button = tk.Button(master=guiView, command=dm.intensityPlot, text="Plot intensity Graph")
 
-plot_rt60graph_button = tk.Button(master=guiView, command=dm.rt60graph, text="Cycle RT60 Graphs")
+plot_lowrt60graph_button = tk.Button(master=guiView, command=dm.lowrt60graph, text="low RT60 Graphs")
+
+plot_mediumrt60graph_button = tk.Button(master=guiView, command=dm.mediumrt60graph, text="medium RT60 Graphs")
+
+plot_highrt60graph_button = tk.Button(master=guiView, command=dm.highrt60graph, text="high RT60 Graphs")
 
 combine_rt60graph_button = tk.Button(master=guiView, command=dm.rt60graphcombine, text="combine RT60 Graphs")
-
 
 # Create text widget and specify size.
 Temp = Text(guiView, height=5, width=52)
@@ -73,9 +76,11 @@ time_button.pack()
 amp_button.pack()
 form_button.pack()
 status_label.pack()
-plot_graph_button.pack()
+plot_wavegraph_button.pack()
 plot_intensity_graph_button.pack()
-plot_rt60graph_button.pack()
+plot_lowrt60graph_button.pack()
+plot_mediumrt60graph_button.pack()
+plot_highrt60graph_button.pack()
 combine_rt60graph_button.pack()
 quit_button.pack()
 
