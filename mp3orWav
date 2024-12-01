@@ -35,10 +35,8 @@ def select_file():
         initialdir='/',
         filetypes=filetypes)
 
-    gfile = filename
 
     # tkinter.messagebox — Tkinter message prompts
-    # placeholder 1
     showinfo(
         title='Selected File',
         message=filename
@@ -47,7 +45,7 @@ def select_file():
     # placeholder 2
     gfile_label = ttk.Label(root, text=gfile)
     gfile_label.pack(side="bottom")
-    return gfile
+    return filename
 
 
 # open button
@@ -62,9 +60,8 @@ close_button = ttk.Button(
     command=root.quit
 )
 open_button.pack(expand=True)
-close_button.pack(expand=True)
-# run the application
-root.mainloop()
+close_button.pack()
+
 
 # assign files
 def upfile():
