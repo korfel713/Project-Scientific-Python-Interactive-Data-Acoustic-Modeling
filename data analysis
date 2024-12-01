@@ -1,6 +1,3 @@
-# start of code
-# some things being imported here are not being used at the moment, as im not sure if i'll need them, so they are included just in case
-
 import os
 import pydub
 from pydub import AudioSegment
@@ -15,27 +12,49 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import *
-import view
 import checkifwav
+from checkifwav import converter_wav
+import download as d
+#
+# def downloader():
+#     converter_wav()
+#     self = os.path.splitext(checkifwav.getFile())[0] + '.wav'
+#     # initializes a variable for use with Pydub
+#     original_audio = pydub.AudioSegment.from_file(self, format="wav")
+#     global audioFile
+#     new_filename = os.path.splitext(self)[0] + '_modified.wav'
+#     audioFile = new_filename
+#     # sets one channel
+#     not_orignal = original_audio.set_channels(1)
+#     # Exports converted file, and also removes metadata (tags).
+#     not_orignal.export(new_filename, format="wav", tags={}, )
+#     # Test to see if is worked
+#     result = os.path.exists(new_filename)
+#     print(result)
+
+
 # displays the time length of the wav audio file
 def displayTime():
-    wave_time = pydub.AudioSegment.from_file(file=checkifwav.audioFile, format="wav")
-    view.Temp.insert(tk.END, "Time: " + str(len(wave_time)))
+    from view import Temp
+    wave_time = pydub.AudioSegment.from_file(file=d.audioFile, format="wav")
+    Temp.insert(tk.END, "Time: " + str(len(wave_time)))
 
 #displays wave form
 def displayForm():
-    wave_form = pydub.AudioSegment.from_file(file=checkifwav.audioFile, format="wav")
-    view.Temp.insert(tk.END, "\nChannels " + str(wave_form.channels))
+    from view import Temp
+    wave_form = pydub.AudioSegment.from_file(file=d.audioFile, format="wav")
+    Temp.insert(tk.END, "\nForm " + str(wave_form.channels))
 
 #displays largest amplitude of the wav audio file.
 def displayamplitude():
-    wave_amp = pydub.AudioSegment.from_file(file=checkifwav.audioFile, format="wav")
-    view.Temp.insert(tk.END, "\nMax Amplitude " + str(wave_amp.max))
+    from view import Temp
+    wave_amp = pydub.AudioSegment.from_file(file=d.audioFile, format="wav")
+    Temp.insert(tk.END, "\nMax Amplitude " + str(wave_amp.max))
 
 
 #creates plot for the audio file
 def wavePlot():
-    wave_plot = checkifwav.audioFile
+    wave_plot = d.audioFile
     audio_file = wave.open(wave_plot, "r")
     # Extract Raw Audio from Wav File
     raw_audio = audio_file.readframes(-1)
@@ -53,4 +72,19 @@ def wavePlot():
     plt.plot(time, amp)
     plt.show()
 
+def guiplot():
+    from view import guiView
+    filename = checkifwav.audioFile
+    # Creates an object from the Figure class, allows a plot to be in the tkinter GUI
+    fig = Figure(figsize=(5, 5), dpi=100)
+
+    rate, data = wavfile.read(filename)  # reading wave file.
+    c = data[0:9999]
+
+    p = fig.gca()
+    p.hist(c, bins='auto')  # arguments are passed to np.histogram.
+
+    canvas = FigureCanvasTkAgg(fig, guiView)
+    canvas.draw()
+    canvas.get_tk_widget().pack()
 
