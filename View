@@ -1,9 +1,5 @@
-#gui view file
-#not working right now, dont know why still testing
-
 import os
 import pydub
-from pydub import AudioSegment
 import wave
 import ffmpeg
 from scipy.io import wavfile
@@ -18,13 +14,18 @@ from tkinter import *
 import checkifwav
 import data_modeling
 
+def select_file():
+    file_path = filedialog.askopenfilename()
+    if file_path:
+        entry.delete(0, tk.END)
+        entry.insert(tk.END, file_path)
 
 guiView = tk.Tk()
 guiView.title("Audio Downloader")
 guiView.resizable(False, False)
 guiView.geometry('600x600')
 
-select_button = tk.Button(guiView, text="Select File", command=checkifwav.select_file)
+select_button = tk.Button(guiView, text="Select File", command=select_file)
 
 
 entry = tk.Entry(guiView, width=50)
@@ -52,7 +53,7 @@ select_button.pack()
 entry.pack()
 detail_label.pack()
 Temp.pack()
-data_modeling.displayTime.pack()
+time_button.pack()
 status_label.pack()
 plot_graph_button.pack()
 quit_button.pack()
