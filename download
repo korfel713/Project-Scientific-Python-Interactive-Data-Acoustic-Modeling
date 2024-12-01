@@ -1,1 +1,23 @@
 #donloader
+
+import os
+import pydub
+from pydub import AudioSegment
+import checkifwav
+from checkifwav import converter_wav
+
+def downloader():
+    converter_wav()
+    self = os.path.splitext(checkifwav.getFile())[0] + '.wav'
+    # initializes a variable for use with Pydub
+    original_audio = pydub.AudioSegment.from_file(self, format="wav")
+    global audioFile
+    new_filename = os.path.splitext(self)[0] + '_modified.wav'
+    audioFile = new_filename
+    # sets one channel
+    not_orignal = original_audio.set_channels(1)
+    # Exports converted file, and also removes metadata (tags).
+    not_orignal.export(new_filename, format="wav", tags={}, )
+    # Test to see if is worked
+    result = os.path.exists(new_filename)
+    print(result)
