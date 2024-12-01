@@ -72,6 +72,34 @@ def wavePlot():
     plt.plot(time, amp)
     plt.show()
 
+def intensityPlot():
+    intensity_plot = d.audioFile
+    audio_file = wave.open(intensity_plot, "r")
+    # Extract Raw Audio from Wav File
+    raw_audio = audio_file.readframes(-1)
+    print(type(raw_audio))
+    fre = np.fromstring(raw_audio, "int16")
+    fs = audio_file.getframerate()
+
+    time = np.linspace(0, len(fre) / fs, num=len(fre))
+
+    # Step 3: Compute the spectrogram
+    frequencies, times, Sxx = spectrogram(fre, fs=fs)
+
+    # Step 4: Plot the intensity (spectrogram)
+    plt.figure(figsize=(10, 6))
+    plt.pcolormesh(times, frequencies, 10 * np.log10(Sxx), shading='auto')  # Log scale for intensity
+
+    plt.figure(1)
+    plt.title("Frequency Graph...")
+    plt.xlabel("Time [s]")
+    plt.ylabel("Frequency [HZ]")
+    plt.legend()
+    plt.colorbar(label='Intensity [dB]')
+    plt.plot(time, fre)
+    plt.show()
+
+
 def guiplot():
     from view import guiView
     filename = checkifwav.audioFile
