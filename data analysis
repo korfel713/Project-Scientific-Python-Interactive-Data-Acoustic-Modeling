@@ -41,9 +41,48 @@ def displayTime():
 
 #displays wave form
 def displayForm():
+    #displays wave form
+def displayForm():
     from view import Temp
-    wave_form = pydub.AudioSegment.from_file(file=d.audioFile, format="wav")
-    Temp.insert(tk.END, "\nForm " + str(wave_form.channels))
+    wave_form = d.audioFile
+    audio_file = wave.open(wave_form, "r")
+
+    # Extract Raw Audio from Wav File
+    raw_audio = audio_file.readframes(-1)
+    print(type(raw_audio))  # Check the type of raw_audio (should be bytes)
+
+    # Convert raw audio bytes to numpy array
+    fre = np.frombuffer(raw_audio, dtype="int16")
+    fs = audio_file.getframerate()  # Sampling frequency (frames per second)
+
+    # Step 1: Get the power of the audio signal (absolute value)
+    opower = np.abs(fre)
+
+    # Step 2: Convert power to a logarithmic scale (dB)
+    power = 20 * np.log10(opower + 1e-6)
+
+    # Step 3: Trim power to make signal start at 0 dB
+    power -= np.max(power)
+
+    # Generate time axis based on the length of the signal and sampling frequency
+    time = np.linspace(0, len(fre) / fs, num=len(fre))
+
+    decay_threshold1 = -10
+    decay_threshold2 = -5
+    decay_threshold3 = -3
+
+    # Step 4: Find the index where power drops below the threshold
+    decay_start_idx1 = np.argmax(power < decay_threshold1)
+    decay_start_idx2 = np.argmax(power < decay_threshold2)
+    decay_start_idx3 = np.argmax(power < decay_threshold3)
+    decay_times1 = time[decay_start_idx1:]  # Corresponding time values
+
+    decay_times2 = time[decay_start_idx2:]  # Corresponding time values
+    decay_times3 = time[decay_start_idx3:]  # Corresponding time values
+    timeavg= (decay_times1 + decay_times2 + decay_times3) / 3
+    diffrence = time - timeavg
+
+    Temp.insert(tk.END, "\ndiffrence " + str(len(timeavg)))
 
 #displays largest amplitude of the wav audio file.
 def displayamplitude():
