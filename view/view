@@ -11,7 +11,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import *
-import data_modeling as dm
+import Control as dm
 import download as d
 
 
@@ -26,23 +26,23 @@ guiView.title("Audio Downloader")
 guiView.resizable(False, False)
 guiView.geometry('600x600')
 
-select_button = tk.Button(guiView, text="Select File", command=select_file)
+select_button = tk.Button(master = guiView, command=select_file, text="Select File")
 
 
-entry = tk.Entry(guiView, width=50)
+entry = tk.Entry(master= guiView, width=50)
 
 
-download_button = tk.Button(guiView, text="Download", command=d.downloader)
+download_button = tk.Button(master= guiView,command=d.downloader, text="Download", )
 
 
-time_button = tk.Button(guiView, text="Time Details", command=dm.displayTime)
+time_button = tk.Button(master= guiView,command=dm.displayTime, text="Time Details")
 
-amp_button = tk.Button(guiView, text="frequency Details", command=dm.displayamplitude)
+amp_button = tk.Button(master= guiView,command=dm.displayamplitude, text="frequency Details")
 
-form_button = tk.Button(guiView, text="form Details", command=dm.displayForm)
+form_button = tk.Button(master= guiView, command=dm.displayForm, text="form Details" )
 
 
-status_label = tk.Label(guiView, text="")
+# status_label = tk.Label(guiView, text="")
 
 
 plot_wavegraph_button = tk.Button(master=guiView, command=dm.wavePlot, text="Plot wave Graph")
@@ -59,9 +59,6 @@ combine_rt60graph_button = tk.Button(master=guiView, command=dm.rt60graphcombine
 
 # Create text widget and specify size.
 Temp = Text(guiView, height=5, width=52)
-# Create detail_label
-detail_label = Label(guiView, text="Details")
-detail_label.config(font=("Courier", 14))
 # Exit Button
 quit_button = Button(guiView, text="Exit",command=guiView.destroy)
 
@@ -70,12 +67,11 @@ quit_button = Button(guiView, text="Exit",command=guiView.destroy)
 select_button.pack()
 entry.pack()
 download_button.pack()
-detail_label.pack()
 Temp.pack()
 time_button.pack()
 amp_button.pack()
 form_button.pack()
-status_label.pack()
+# status_label.pack()
 plot_wavegraph_button.pack()
 plot_intensity_graph_button.pack()
 plot_lowrt60graph_button.pack()
