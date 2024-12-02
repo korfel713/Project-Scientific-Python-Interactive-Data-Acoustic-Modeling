@@ -15,22 +15,6 @@ from tkinter import *
 import checkifwav
 from checkifwav import converter_wav
 import download as d
-#
-# def downloader():
-#     converter_wav()
-#     self = os.path.splitext(checkifwav.getFile())[0] + '.wav'
-#     # initializes a variable for use with Pydub
-#     original_audio = pydub.AudioSegment.from_file(self, format="wav")
-#     global audioFile
-#     new_filename = os.path.splitext(self)[0] + '_modified.wav'
-#     audioFile = new_filename
-#     # sets one channel
-#     not_orignal = original_audio.set_channels(1)
-#     # Exports converted file, and also removes metadata (tags).
-#     not_orignal.export(new_filename, format="wav", tags={}, )
-#     # Test to see if is worked
-#     result = os.path.exists(new_filename)
-#     print(result)
 
 
 # displays the time length of the wav audio file
@@ -39,9 +23,6 @@ def displayTime():
     wave_time = pydub.AudioSegment.from_file(file=d.audioFile, format="wav")
     Temp.insert(tk.END, "Time: " + str(len(wave_time)))
 
-#displays wave form
-def displayForm():
-    #displays wave form
 def displayForm():
     from view import Temp
     wave_form = d.audioFile
@@ -271,57 +252,6 @@ def highrt60graph():
     plt.legend()
     plt.grid(True)
     plt.show()
-
-
-# def rt60graph():
-#
-#     rt60_plot = d.audioFile
-#     audio_file = wave.open(rt60_plot, "r")
-#     # Extract Raw Audio from Wav File
-#     raw_audio = audio_file.readframes(-1)
-#     print(type(raw_audio))
-#     fre = np.fromstring(raw_audio, "int16")
-#     fs = audio_file.getframerate()
-#
-#     #start geting the power of the audion  file
-#     opower = np.abs(fre)
-#
-#     # Step 2: Convert power to a logarithmic scale (dB)
-#     power = 20 * np.log10(opower + 1e-6)
-#
-#     # Step 3: Trim power to make signal starts at 0 dB
-#     power -= np.max(power)
-#
-#     time = np.linspace(0, len(fre) / fs, num=len(fre))
-#     if Count.getcount == 1:
-#         power = np.argmax(power -10)
-#         plt.figure(1)
-#         plt.title("low RT60 Graph")
-#         plt.xlabel("Time [s]")
-#         plt.ylabel("Power [db]")
-#         plt.legend()
-#         plt.plot(time, power)
-#         plt.show()
-#
-#     if (Count.getcount == 2):
-#         power = np.argmax(power -5)
-#         plt.figure(1)
-#         plt.title("medium RT60 Graph")
-#         plt.xlabel("Time [s]")
-#         plt.ylabel("Power [db]")
-#         plt.legend()
-#         plt.plot(time, power)
-#         plt.show()
-#
-#     if (Count.getcount == 3):
-#         power = np.argmax(power-3)
-#         plt.figure(1)
-#         plt.title("high RT60 Graph")
-#         plt.xlabel("Time [s]")
-#         plt.ylabel("Power [db]")
-#         plt.legend()
-#         plt.plot(time, power)
-#         plt.show()
 
 def rt60graphcombine():
     # Assuming d.audioFile holds the path to the wav file
