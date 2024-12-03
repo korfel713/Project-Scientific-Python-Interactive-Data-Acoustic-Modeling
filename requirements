@@ -1,0 +1,26 @@
+Requirements
+
+
+to run this code you need to have from the view file downloaded tkinter to use the following imports
+import tkinter as tk
+from tkinter import filedialog
+from tkinter import *
+
+for the download file you needed to download os and pydub to use the following imports
+import os
+import pydub
+
+for the control file you needed to download pydub, wave, matplotlib, numpy, tkinter, scipy to use the following imports
+import pydub
+import wave
+import matplotlib.pyplot as plt
+import numpy as np
+import tkinter as tk
+from scipy.signal import spectrogram
+
+finally for the Model file you needed to download os and pydub to use the following imports
+import os
+from pydub import AudioSegment
+
+all of these imports are required to be able to run the code properly.
+if the code is not running then it most likely means one of these were not downloaded right as the code is in fully functioning order.
