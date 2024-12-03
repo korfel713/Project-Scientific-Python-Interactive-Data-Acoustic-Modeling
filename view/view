@@ -3,6 +3,8 @@ from tkinter import filedialog
 from tkinter import *
 import Control as dm
 import download as d
+from Control import displayTime, displayamplitude, displayForm
+
 
 def select_file():
     file_path = filedialog.askopenfilename()
@@ -24,6 +26,14 @@ class Run:
 def download():
     d.downloader(entry.get())
 
+def dtime():
+    displayTime(Temp)
+
+def damp():
+    displayamplitude(Temp)
+
+def dform():
+    displayForm(Temp)
 
 guiView = tk.Tk()
 guiView.title("Audio Downloader")
@@ -41,11 +51,11 @@ ent = entry.get()
 download_button = tk.Button(master= guiView,command=download, text="Download", )
 
 
-time_button = tk.Button(master= guiView,command=dm.displayTime, text="Time Details")
+time_button = tk.Button(master= guiView,command=dtime, text="Time Details")
 
-amp_button = tk.Button(master= guiView,command=dm.displayamplitude, text="frequency Details")
+amp_button = tk.Button(master= guiView,command=damp, text="frequency Details")
 
-form_button = tk.Button(master= guiView, command=dm.displayForm, text="form Details" )
+form_button = tk.Button(master= guiView, command=dform, text="form Details" )
 
 
 status_label = tk.Label(guiView, text="")
@@ -89,5 +99,6 @@ quit_button.pack()
 if __name__ == "__main__":
     run = Run()
     run.run()
+
 
 
