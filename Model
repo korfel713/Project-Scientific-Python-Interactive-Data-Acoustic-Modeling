@@ -1,42 +1,23 @@
-# uncommeded code was used for gui, but keept other code to keep a record of it.
 import os
-
 from pydub import AudioSegment
-import fleep
-from os import path
-import ffmpeg
-from scipy.io import wavfile
-import scipy.io
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import tkinter as tk
-from tkinter import filedialog
-from tkinter import *
 
-
-# def select_file():
-#     file_path = filedialog.askopenfilename()
-#     if file_path:
-#         view.entry.delete(0, tk.END)
-#         view.entry.insert(tk.END, file_path)
-
-
-# get method for use with the functions that need the filename.
-def getFile():
-    import view
-    return view.entry.get()
-
-
-def converter_wav():
-    filename = getFile()
+def converter_wav(ent):
+    filename = ent
     # Converts the input file to the appropriate extension with the same name
     new_filename = os.path.splitext(filename)[0] + '.wav'
     # Loads the audio file
     wav_audio = AudioSegment.from_mp3(filename)
     # Exports the file in wav format
     wav_audio.export(new_filename, format="wav")
+    
+
+# BELOW CODES ARE OLD CODES THAT ENDED UP NOT WORKING FOR THE CODE KEEPT FOR RECORD
+
+# get method for use with the functions that need the filename.
+# def getFile():
+#     from view import entry
+#     return entry.get()
+
 
 # def converttowav():
 #     # assign files
@@ -56,4 +37,6 @@ def converter_wav():
 #         sound = AudioSegment.from_mp3(input_file)
 #         sound.export(output_file, format="wav")
 #         output_file = "result.wav"
+
+
 
