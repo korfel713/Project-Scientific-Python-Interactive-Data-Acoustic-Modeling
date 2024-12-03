@@ -1,30 +1,21 @@
-import os
 import pydub
-from pydub import AudioSegment
 import wave
-import ffmpeg
-from scipy.io import wavfile
-import scipy.io
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
-from tkinter import filedialog
-from tkinter import *
-import checkifwav
-from checkifwav import converter_wav
+from scipy.signal import spectrogram
 import download as d
 
 
 # displays the time length of the wav audio file
-def displayTime():
-    from view import Temp
+def displayTime(temp):
+    # from view import Temp
     wave_time = pydub.AudioSegment.from_file(file=d.audioFile, format="wav")
-    Temp.insert(tk.END, "Time: " + str(len(wave_time)))
+    temp.insert(tk.END, "Time: " + str(len(wave_time)) + "\n")
 
-def displayForm():
-    from view import Temp
+#displays wave form diffrence
+def displayForm(temp):
+    # from view import Temp
     wave_form = d.audioFile
     audio_file = wave.open(wave_form, "r")
 
@@ -63,13 +54,13 @@ def displayForm():
     timeavg= (decay_times1 + decay_times2 + decay_times3) / 3
     diffrence = time - timeavg
 
-    Temp.insert(tk.END, "\ndiffrence " + str(len(timeavg)))
+    temp.insert(tk.END, "diffrence " + str(len(timeavg)) + "\n")
 
 #displays largest amplitude of the wav audio file.
-def displayamplitude():
-    from view import Temp
+def displayamplitude(temp):
+    # from view import Temp
     wave_amp = pydub.AudioSegment.from_file(file=d.audioFile, format="wav")
-    Temp.insert(tk.END, "\nMax Amplitude " + str(wave_amp.max))
+    temp.insert(tk.END, "Max Amplitude " + str(wave_amp.max) + "\n")
 
 
 #creates plot for the audio file
@@ -85,7 +76,7 @@ def wavePlot():
     time = np.linspace(0, len(amp) / fs, num=len(amp))
 
     plt.figure(1)
-    plt.title("Signal Wave...")
+    plt.title("Wavefrom Graph")
     plt.xlabel("Time [s]")
     plt.ylabel("Amplitude")
     plt.legend()
@@ -118,7 +109,6 @@ def intensityPlot():
     plt.colorbar(label='Intensity [dB]')
     plt.plot(time, fre)
     plt.show()
-
 
 def lowrt60graph():
     # Assuming d.audioFile holds the path to the wav file
@@ -308,20 +298,4 @@ def rt60graphcombine():
     plt.legend()
     plt.grid(True)
     plt.show()
-
-def guiplot():
-    from view import guiView
-    filename = checkifwav.audioFile
-    # Creates an object from the Figure class, allows a plot to be in the tkinter GUI
-    fig = Figure(figsize=(5, 5), dpi=100)
-
-    rate, data = wavfile.read(filename)  # reading wave file.
-    c = data[0:9999]
-
-    p = fig.gca()
-    p.hist(c, bins='auto')  # arguments are passed to np.histogram.
-
-    canvas = FigureCanvasTkAgg(fig, guiView)
-    canvas.draw()
-    canvas.get_tk_widget().pack()
 
