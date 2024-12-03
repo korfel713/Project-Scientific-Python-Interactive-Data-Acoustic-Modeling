@@ -1,19 +1,8 @@
-import os
-import pydub
-import wave
-import ffmpeg
-from scipy.io import wavfile
-import scipy.io
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import *
 import Control as dm
 import download as d
-
 
 def select_file():
     file_path = filedialog.askopenfilename()
@@ -21,18 +10,35 @@ def select_file():
         entry.delete(0, tk.END)
         entry.insert(tk.END, file_path)
 
+# Run Program
+class Run:
+    count = 0
+    ent = ""
+    def __init__(self):
+        self.count +=1
+    def run(self):
+        if self.count == 1:
+            self.count += 5
+            guiView.mainloop()
+
+def download():
+    d.downloader(entry.get())
+
+
 guiView = tk.Tk()
 guiView.title("Audio Downloader")
 guiView.resizable(False, False)
 guiView.geometry('600x600')
+
 
 select_button = tk.Button(master = guiView, command=select_file, text="Select File")
 
 
 entry = tk.Entry(master= guiView, width=50)
 
+ent = entry.get()
 
-download_button = tk.Button(master= guiView,command=d.downloader, text="Download", )
+download_button = tk.Button(master= guiView,command=download, text="Download", )
 
 
 time_button = tk.Button(master= guiView,command=dm.displayTime, text="Time Details")
@@ -42,7 +48,7 @@ amp_button = tk.Button(master= guiView,command=dm.displayamplitude, text="freque
 form_button = tk.Button(master= guiView, command=dm.displayForm, text="form Details" )
 
 
-# status_label = tk.Label(guiView, text="")
+status_label = tk.Label(guiView, text="")
 
 
 plot_wavegraph_button = tk.Button(master=guiView, command=dm.wavePlot, text="Plot wave Graph")
@@ -71,7 +77,7 @@ Temp.pack()
 time_button.pack()
 amp_button.pack()
 form_button.pack()
-# status_label.pack()
+status_label.pack()
 plot_wavegraph_button.pack()
 plot_intensity_graph_button.pack()
 plot_lowrt60graph_button.pack()
@@ -80,5 +86,8 @@ plot_highrt60graph_button.pack()
 combine_rt60graph_button.pack()
 quit_button.pack()
 
-# Run Program
-guiView.mainloop()
+if __name__ == "__main__":
+    run = Run()
+    run.run()
+
+
