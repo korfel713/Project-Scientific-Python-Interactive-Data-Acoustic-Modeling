@@ -9,4 +9,6 @@ The application leverages Python and scientific libraries such as Pandas, SciPy,
 
 using the model of view, model, and control files the code was degined to pop up a gui when being runned and ustilzing the buttons display the required info and graphs to the corisponding audio files that are downloaded.
 
+the most up to date files that need to be used for this code to run succesfully are the files named view, Model, download, Control
+
 
