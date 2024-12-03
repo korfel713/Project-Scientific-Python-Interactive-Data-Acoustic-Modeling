@@ -1,5 +1,5 @@
 IMPORTANT
-Place clapMP3.mp3 into the directory with the rest of the files
+ANY PYTHON VERSION OF 3.12 OR ERIRLER SHOULD WORK, BUT IF YOU RUN INTO PROBLEMS THE CODE WAS PROGRAMED IN 3.12 SO TRY THAT VERSION.
 
 Scientific Python Interactive Data Acoustic Modeling (SPIDAM) Project Overview
 
@@ -7,7 +7,6 @@ The SPIDAM project aims to develop an interactive data analysis and modeling pla
 
 The application leverages Python and scientific libraries such as Pandas, SciPy, Matplotlib, NumPy, and LibROSA, and includes a graphical user interface (GUI) for seamless interaction.
 
-Place clapMP3.mp3 into the directory with the rest of the files
+using the model of view, model, and control files the code was degined to pop up a gui when being runned and ustilzing the buttons display the required info and graphs to the corisponding audio files that are downloaded.
 
 
-currently their is a problem where the gui pops up twice, and you must first press the download button, then in the second gui that will pop up, press selct file, and selct the audio file. after that press donwload again, and then the buttons will work perfectly, with the note that one of the two guis will be dead, so no need to use it.
